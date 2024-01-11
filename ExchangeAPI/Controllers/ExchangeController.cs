@@ -16,19 +16,27 @@ namespace ExchangeAPI.Controllers
     public class ExchangeController : ControllerBase
     {
 
-        [HttpGet("SupportedCurrencies")]
-        public IActionResult GetSupportedCurrencies()
+        [HttpGet("InstantExchangeRate")]
+        public IActionResult GetInstantExchangeRate()
         {
-            Currencies[] currencies = (Currencies[])Enum.GetValues(typeof(Currencies));
-            return Ok(currencies);
+            var APIresult = ExchangeHelper.GetDeserializeAPI("TRY");
+            var result = ExchangeHelper.GetExchangeCurrencies(APIresult);
+            return Ok(result);
         }
-
+        
         [HttpGet("Exchange")]
         public IActionResult GetExchangeForValueTwoExchange([FromQuery] GetExchangeForValuteTwoExchangeModel model)
         {
             var APIresult = ExchangeHelper.GetDeserializeAPI(model.CurrencyOne.ToString());
             var result = ExchangeHelper.GetExchangePropertyValue(APIresult.conversion_rates, model.CurrencyTwo.ToString()) * model.Amount;
             return Ok(result);
+        }
+
+        [HttpGet("SupportedCurrencies")]
+        public IActionResult GetSupportedCurrencies()
+        {
+            Currencies[] currencies = (Currencies[])Enum.GetValues(typeof(Currencies));
+            return Ok(currencies);
         }
     }
 }

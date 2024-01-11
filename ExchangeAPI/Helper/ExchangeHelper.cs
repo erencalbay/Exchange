@@ -18,7 +18,7 @@ namespace ExchangeAPI.Helper
             }
             return 0.0;
         }
-        public static ExchangeEntity GetDeserializeAPI(string typeOne = "None")
+        public static ExchangeEntity GetDeserializeAPI(string typeOne = "TRY")
         {
             String URLString = "https://v6.exchangerate-api.com/v6/c47ca772c6a15693dbcfc070/latest/USD";
             if (typeOne!="None")
