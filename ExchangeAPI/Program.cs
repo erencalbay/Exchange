@@ -12,11 +12,9 @@ builder.Services.AddControllers()
  options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()))
     .AddFluentValidation(configuration => configuration.RegisterValidatorsFromAssemblyContaining<GetExchangeForValuteTwoExchangeModelValidation>());
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-var client = builder.Configuration.GetValue<string>("TokenOption:Token");
-
 
 var app = builder.Build();
 

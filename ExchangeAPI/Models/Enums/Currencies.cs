@@ -1,5 +1,6 @@
 ﻿namespace ExchangeAPI.Models.Enums
 {
+    //kurlar, desteklenenler için
     public enum Currencies
     {
         AED,

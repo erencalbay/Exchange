@@ -2,6 +2,7 @@
 
 namespace ExchangeAPI.Models.ViewModel
 {
+    //model için validation
     public class GetExchangeForValuteTwoExchangeModelValidation : AbstractValidator<GetExchangeForValuteTwoExchangeModel>
     {
         public GetExchangeForValuteTwoExchangeModelValidation()

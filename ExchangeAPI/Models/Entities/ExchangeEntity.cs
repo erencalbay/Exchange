@@ -1,5 +1,6 @@
 ﻿namespace ExchangeAPI.Models.Entities
 {
+    //hazır api entity, json çıktıları için
     public class ExchangeEntity
     {
         public string result { get; set; }

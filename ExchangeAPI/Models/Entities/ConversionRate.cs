@@ -1,5 +1,6 @@
 ﻿namespace ExchangeAPI.Models.Entities
 {
+    //kurların prop'u
     public class ConversionRate
     {
         public double AED { get; set; }

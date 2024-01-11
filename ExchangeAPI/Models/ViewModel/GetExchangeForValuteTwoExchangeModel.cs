@@ -3,6 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace ExchangeAPI.Models.ViewModel
 {
+    //giriş yapılacak modelview
     public class GetExchangeForValuteTwoExchangeModel
     {
         public double Amount { get; set; }

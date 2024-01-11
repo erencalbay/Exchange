@@ -26,12 +26,14 @@ namespace ExchangeAPI.Controllers
         public IActionResult GetInstantExchangeRate()
         {
 
+            //appsettings'ten token alınır
             string token = _configuration.GetSection("TokenOption")
                 .GetSection("Token").Value;
+
+            //API cevabı
             var APIresult = ExchangeHelper.GetDeserializeAPI(token,"TRY");
             var result = ExchangeHelper.GetExchangeCurrencies(APIresult);
             return Ok(result);
-            
         }
         
         [HttpGet("Exchange")]
