@@ -1,5 +1,7 @@
 ﻿using ExchangeAPI.Helper;
 using ExchangeAPI.Models.Entities;
+using ExchangeAPI.Models.Enums;
+using ExchangeAPI.Models.ViewModel;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -14,19 +16,18 @@ namespace ExchangeAPI.Controllers
     public class ExchangeController : ControllerBase
     {
 
-        [HttpGet]
-        public IActionResult GetSupportedExchanges()
+        [HttpGet("SupportedCurrencies")]
+        public IActionResult GetSupportedCurrencies()
         {
-            var APIresult = ExchangeHelper.GetDeserializeAPI();
-            var result = ExchangeHelper.GetExchangeCurrencies(APIresult);
-            return Ok(result);
+            Currencies[] currencies = (Currencies[])Enum.GetValues(typeof(Currencies));
+            return Ok(currencies);
         }
 
-        [HttpGet("{amount}/{typeOne}/{typeTwo}")]
-        public IActionResult GetExchangeForValueTwoExchange(double amount, string typeOne = "USD", string typeTwo = "TRY")
+        [HttpGet("Exchange")]
+        public IActionResult GetExchangeForValueTwoExchange([FromQuery] GetExchangeForValuteTwoExchangeModel model)
         {
-            var APIresult = ExchangeHelper.GetDeserializeAPI(typeOne);
-            var result = ExchangeHelper.GetExchangePropertyValue(APIresult.conversion_rates, typeTwo) * amount;
+            var APIresult = ExchangeHelper.GetDeserializeAPI(model.CurrencyOne.ToString());
+            var result = ExchangeHelper.GetExchangePropertyValue(APIresult.conversion_rates, model.CurrencyTwo.ToString()) * model.Amount;
             return Ok(result);
         }
     }
