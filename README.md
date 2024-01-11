@@ -7,5 +7,5 @@ Supported Currencies
 ![Supported Currencies](https://github.com/erencalbay/Exchange/blob/main/docs/supportedcurrencies.png)
 
 Instant Exchange
-![InstantExchange](https://github.com/erencalbay/Exchange/blob/main/docs/intsantexchange.png)
+![InstantExchange](https://github.com/erencalbay/Exchange/blob/main/docs/instantexchange.png)
 
