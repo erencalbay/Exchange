@@ -1,5 +1,6 @@
 using ExchangeAPI.Models.ViewModel;
 using FluentValidation.AspNetCore;
+using Microsoft.Extensions.Configuration;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,9 @@ builder.Services.AddControllers()
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+var client = builder.Configuration.GetValue<string>("TokenOption:Token");
+
 
 var app = builder.Build();
 

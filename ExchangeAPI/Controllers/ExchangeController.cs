@@ -15,13 +15,23 @@ namespace ExchangeAPI.Controllers
     [Route("api")]
     public class ExchangeController : ControllerBase
     {
+        private readonly IConfiguration _configuration;
+
+        public ExchangeController(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
 
         [HttpGet("InstantExchangeRate")]
         public IActionResult GetInstantExchangeRate()
         {
-            var APIresult = ExchangeHelper.GetDeserializeAPI("TRY");
+
+            string token = _configuration.GetSection("TokenOption")
+                .GetSection("Token").Value;
+            var APIresult = ExchangeHelper.GetDeserializeAPI(token,"TRY");
             var result = ExchangeHelper.GetExchangeCurrencies(APIresult);
             return Ok(result);
+            
         }
         
         [HttpGet("Exchange")]

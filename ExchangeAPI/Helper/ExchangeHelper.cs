@@ -1,6 +1,8 @@
 ﻿using ExchangeAPI.Models.Entities;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Reflection;
 using System.Text.Json.Nodes;
@@ -9,6 +11,13 @@ namespace ExchangeAPI.Helper
 {
     public class ExchangeHelper
     {
+        public static IConfiguration _configuration { get; set; }
+
+        public ExchangeHelper(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         public static double GetExchangePropertyValue(ConversionRate conversionRate, string propertyName)
         {
             PropertyInfo property = conversionRate.GetType().GetProperty(propertyName);
@@ -18,11 +27,11 @@ namespace ExchangeAPI.Helper
             }
             return 0.0;
         }
-        public static ExchangeEntity GetDeserializeAPI(string typeOne = "TRY")
-        {
-            String URLString = "https://v6.exchangerate-api.com/v6/c47ca772c6a15693dbcfc070/latest/USD";
+        public static ExchangeEntity GetDeserializeAPI(string token, string typeOne = "TRY")
+        {            
+            String URLString = $"https://v6.exchangerate-api.com/v6/{token}/latest/USD";
             if (typeOne!="None")
-                URLString = "https://v6.exchangerate-api.com/v6/c47ca772c6a15693dbcfc070/latest/" + typeOne;
+                URLString = $"https://v6.exchangerate-api.com/v6/{token}/latest/" + typeOne;
             var webClient = new System.Net.WebClient();
             var json = webClient.DownloadString(URLString);
             ExchangeEntity Test = JsonConvert.DeserializeObject<ExchangeEntity>(json);
